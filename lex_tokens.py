@@ -8,7 +8,7 @@ tokens_list = [
     (r'\=', RESERVED),
     (r'\+', RESERVED),
     (r'\-', RESERVED),
-    (r'[0-9]',   INT),
+    (r'[0-9]+',   INT),
 ]
 
 def token_lex(characters):
