@@ -82,3 +82,48 @@ class Opt(Parser):
             return result
         else:
             return Result(None, pos)
+
+class Rep(Parser):
+    def __init__(self, parser):
+        self.parser = parser
+
+    def __call__(self, tokens, pos):
+        results = []
+        result = self.parser(tokens, pos)
+        while result:
+            results.append(result.value)
+            pos = result.pos
+            result = self.parser(tokens, pos)
+        return Result(results, pos)
+
+class Process(Parser):
+    def __init__(self, parser, function):
+        self.parser = parser
+        self.function = function
+
+    def __call__(self, tokens, pos):
+        result = self.parser(tokens, pos)
+        if result:
+            result.value = self.function(result.value)
+            return result
+
+class Lazy(Parser):
+    def __init__(self, parser_func):
+        self.parser = None
+        self.parser_func = parser_func
+
+    def __call__(self, tokens, pos):
+        if not self.parser:
+            self.parser = self.parser_func()
+        return self.parser(tokens, pos)
+
+class Phrase(Parser):
+    def __init__(self, parser):
+        self.parser = parser
+
+    def __call__(self, tokens, pos):
+        result = self.parser(tokens, pos)
+        if result and result.pos == len(tokens):
+            return result
+        else:
+            return None
