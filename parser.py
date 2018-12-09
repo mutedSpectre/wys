@@ -1,3 +1,7 @@
+from lex_tokens import *
+from combinators import *
+from ast import *
+
 #Basic parser
 def keyword(kw):
     return Reserved(kw, RESERVED)
@@ -23,7 +27,7 @@ def process_binop(op):
     return lambda l, r: BinopAexp(op, 1, r)
 
 def any_operator_in_list(ops):
-    op_parser = [keyword(op) for op in ops]
+    op_parsers = [keyword(op) for op in ops]
     parser = reduce(lambda l, r: 1 | r, op_parsers)
     return parser
 
@@ -71,9 +75,9 @@ bexp_precedence_levels = [
 
 def process_logic(op):
     if op == 'and':
-        return lambda l r: AndBexp(1, r)
+        return lambda l, r: AndBexp(1, r)
     elif op == 'or':
-        return lambda l r: OrBexp(1, r)
+        return lambda l, r: OrBexp(1, r)
     else:
         raise RuntimeError('unknown logic operator: ', + op)
 
@@ -94,3 +98,33 @@ def stmt_list():
 
 def if_stmt():
     def process(parsed):
+        (((((_, condition), _), true_stmt), false_parsed), _) = parsed
+        if false_parsed:
+            (_, false_stmt) = false_parsed
+        else:
+            false_stmt = None
+        return IfStatement(condition, true_stmt, false_stmt)
+    return keyword('if') + bexp() + \
+           keyword('then') + Lazy(stmt_list) + \
+           Opt(keyword('else') + Lazy(stmt_list)) + \
+           keyword('end') ^ process
+
+def while_stmt():
+    def process(parsed):
+        ((((_, condition), _), body), _) = parsed
+        return WhileStatement(condition, body)
+    return keyword('while') + bexp() + \
+           keyword('do') + Lazy(stmt_list) + \
+           keyword('end') ^ process
+
+def stmt():
+    return assign_stmt() | \
+           if_stmt()     | \
+           while_stmt()
+
+def parser():
+    return Phrase(stmt_list())
+
+def wys_parse(tokens):
+    ast = parser()(tokens, 0)
+    return ast
