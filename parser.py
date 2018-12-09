@@ -71,9 +71,9 @@ bexp_precedence_levels = [
 
 def process_logic(op):
     if op == 'and':
-        return lambda 1, r: AndBexp(1, r)
+        return lambda l r: AndBexp(1, r)
     elif op == 'or':
-        return lambda 1, r: OrBexp(1, r)
+        return lambda l r: OrBexp(1, r)
     else:
         raise RuntimeError('unknown logic operator: ', + op)
 
@@ -81,3 +81,16 @@ def bexp():
     return precedence(bexp_term(),
                       bexp_precedence_levels,
                       process_logic)
+
+def assign_stmt():
+    def process(parsed):
+        ((name, _), exp) = parsed
+        return AssignStatement(name, exp)
+    return id + keyword(':=') + aexp() ^ process
+
+def stmt_list():
+    separator = keyword(';') ^ (lambda x: lambda l, r: CompoundStatement(l, r))
+    return Exp(stmt(), separator)
+
+def if_stmt():
+    def process(parsed):
