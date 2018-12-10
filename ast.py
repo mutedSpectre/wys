@@ -96,7 +96,16 @@ class AndBexp(Bexp):
 
 class OrBexp(Bexp):
     def __init__(self, left, right):
-        ...
+        self.left = left
+        self.right = right
+
+    def __repr__(self):
+        return 'OrBexp(%s, %s)' % (self.left, self.right)
+
+    def eval(self, env):
+        left_value = self.left.eval(env)
+        right_value = self.right.eval(env)
+        return left_value or right_value
 
 class NotBexp(Bexp):
     def __init__(self, exp):
