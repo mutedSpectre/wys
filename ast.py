@@ -109,7 +109,14 @@ class OrBexp(Bexp):
 
 class NotBexp(Bexp):
     def __init__(self, exp):
-        ...
+        self.exp = exp
+
+    def __repr__(self):
+        return 'NotBexp(%s)' % self.exp
+
+    def eval(self, env):
+        value = self.exp.eval(env)
+        return not value
 
 class Statement(Equality):
     pass
