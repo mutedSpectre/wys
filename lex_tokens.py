@@ -5,10 +5,33 @@ INT      = 'INT'
 ID       = 'ID'
 
 tokens_list = [
-    (r'\=', RESERVED),
+    (r'[ \n\t]+', None),
+    (r'#[^\n]*', None),
+    (r'\:=', RESERVED),
+    (r'\(', RESERVED),
+    (r'\)', RESERVED),
+    (r';', RESERVED),
     (r'\+', RESERVED),
-    (r'\-', RESERVED),
-    (r'[0-9]+',   INT),
+    (r'-', RESERVED),
+    (r'\*', RESERVED),
+    (r'/', RESERVED),
+    (r'<=', RESERVED),
+    (r'<', RESERVED),
+    (r'>=', RESERVED),
+    (r'>', RESERVED),
+    (r'!=', RESERVED),
+    (r'=', RESERVED),
+    (r'and', RESERVED),
+    (r'or', RESERVED),
+    (r'not', RESERVED),
+    (r'if', RESERVED),
+    (r'then', RESERVED),
+    (r'else', RESERVED),
+    (r'while', RESERVED),
+    (r'do', RESERVED),
+    (r'end', RESERVED),
+    (r'[0-9]+', INT),
+    (r'[A-Za-z][A-Za-z0-9_]*', ID),
 ]
 
 def token_lex(characters):
