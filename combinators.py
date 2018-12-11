@@ -19,6 +19,16 @@ class Parser:
     def __xor__(self, function):
         return Process(self, function)
 
+class Tag(Parser):
+    def __init__(self, tag):
+        self.tag = tag
+
+    def __call__(self, tokens, pos):
+        if pos < len(tokens) and tokens[pos][1] is self.tag:
+            return Result(tokens[pos][0], pos + 1)
+        else:
+            return None
+
 class Reserved(Parser):
     def __init__(self, value, tag):
         self.value = value
@@ -26,18 +36,8 @@ class Reserved(Parser):
 
     def __call__(self, tokens, pos):
         if pos < len(tokens) and \
-            tokens[pos][0] == self.value and \
-            tokens[pos][1] is self.tag:
-             return Result(tokens[pos][0], pos + 1)
-        else:
-            return None
-
-class Tag(Parser):
-    def __init__(self, tag):
-        self.tag = tag
-
-    def __call__(self, tokens, pos):
-        if pos < len(tokens) and tokens[pos][1] is self.tag:
+           tokens[pos][0] == self.value and \
+           tokens[pos][1] is self.tag:
             return Result(tokens[pos][0], pos + 1)
         else:
             return None
@@ -55,6 +55,26 @@ class Concat(Parser):
                 combined_value = (left_result.value, right_result.value)
                 return Result(combined_value, right_result.pos)
         return None
+
+class Exp(Parser):
+    def __init__(self, parser, separator):
+        self.parser = parser
+        self.separator = separator
+
+    def __call__(self, tokens, pos):
+        result = self.parser(tokens, pos)
+
+        def process_next(parsed):
+            (sepfunc, right) = parsed
+            return sepfunc(result.value, right)
+        next_parser = self.separator + self.parser ^ process_next
+
+        next_result = result
+        while next_result:
+            next_result = next_parser(tokens, result.pos)
+            if next_result:
+                result = next_result
+        return result
 
 class Alternate(Parser):
     def __init__(self, left, right):
@@ -124,23 +144,3 @@ class Phrase(Parser):
             return result
         else:
             return None
-
-class Exp(Parser):
-    def __init__(self, parser, separator):
-        self.parser = parser
-        self.separator = separator
-
-    def __call__(self, tokens, pos):
-        result = self.parser(tokens, pos)
-
-        def process_next(parsed):
-            (sepfunc, right) = parsed
-            return sepfunc(result.value, right)
-        next_parser = self.separator + self.parser ^ process_next
-
-        next_result = result
-        while next_result:
-            next_result = next_parser(tokens, result.pos)
-            if next_result:
-                result = next_result
-        return result
