@@ -7,9 +7,6 @@ class Result:
         return 'Result(%s, %d)' % (self.value, self.pos)
 
 class Parser:
-    def __call__(self, tokens, pos):
-        return None
-
     def __add__(self, other):
         return Concat(self, other)
 
@@ -31,7 +28,7 @@ class Reserved(Parser):
         if pos < len(tokens) and \
             tokens[pos][0] == self.value and \
             tokens[pos][1] is self.tag:
-                return Result(tokens[pos][0], pos + 1)
+             return Result(tokens[pos][0], pos + 1)
         else:
             return None
 
