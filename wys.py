@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 import sys
-from parser import *
+from wys_parser import *
 from lex_tokens import *
 
 def usage():
-    sys.stderr.write('Usage: imp filename\n')
+    sys.stderr.write('Usage: wys filename\n')
     sys.exit(1)
 
 if __name__ == '__main__':
