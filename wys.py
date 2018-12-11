@@ -2,7 +2,7 @@
 
 import sys
 from parser import *
-from lexer import *
+from lex_tokens import *
 
 def usage():
     sys.stderr.write('Usage: imp filename\n')
