@@ -40,7 +40,7 @@ def assign_stmt():
         ((name, _), exp) = parsed
         return AssignStatement(name, exp)
 
-    return id + keyword(':=') + aexp() ^ process
+    return id + keyword('=') + aexp() ^ process
 
 
 def if_stmt():
@@ -86,7 +86,7 @@ def bexp_not():
 
 
 def bexp_relop():
-    relops = ['<', '<=', '>', '>=', '=', '!=']
+    relops = ['<', '<=', '>', '>=', '==', '!=']
     return aexp() + any_operator_in_list(relops) + aexp() ^ process_relop
 
 
@@ -114,7 +114,7 @@ def aexp_value():
            (id ^ (lambda v: VarAexp(v)))
 
 
-# An IMP-specific combinator for binary operator expressions (aexp and bexp)
+#  Combinator for binary operator expressions (aexp and bexp)
 def precedence(value_parser, precedence_levels, combine):
     def op_parser(precedence_level):
         return any_operator_in_list(precedence_level) ^ combine
