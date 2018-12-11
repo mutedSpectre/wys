@@ -2,12 +2,12 @@ import sys
 import re
 
 
-def lex(characters, tokens_list):
+def lex(characters, token_exprs):
     pos = 0
     tokens = []
     while pos < len(characters):
         match = None
-        for token_expr in tokens_list:
+        for token_expr in token_exprs:
             pattern, tag = token_expr
             regex = re.compile(pattern)
             match = regex.match(characters, pos)
