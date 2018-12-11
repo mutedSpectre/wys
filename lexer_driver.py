@@ -6,6 +6,6 @@ if __name__ == '__main__':
     file = open(filename)
     characters = file.read()
     file.close()
-    tokens = imp_lex(characters)
+    tokens = token_lex(characters)
     for token in tokens:
         print token
