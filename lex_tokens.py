@@ -7,7 +7,7 @@ ID       = 'ID'
 token_exprs = [
     (r'[ \n\t]+',              None),
     (r'#[^\n]*',               None),
-    (r'\:=',                   RESERVED),
+    (r'\=',                    RESERVED),
     (r'\(',                    RESERVED),
     (r'\)',                    RESERVED),
     (r';',                     RESERVED),
@@ -20,7 +20,7 @@ token_exprs = [
     (r'>=',                    RESERVED),
     (r'>',                     RESERVED),
     (r'!=',                    RESERVED),
-    (r'=',                     RESERVED),
+    (r'==',                    RESERVED),
     (r'and',                   RESERVED),
     (r'or',                    RESERVED),
     (r'not',                   RESERVED),
