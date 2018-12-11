@@ -4,7 +4,7 @@ RESERVED = 'RESERVED'
 INT      = 'INT'
 ID       = 'ID'
 
-tokens_list = [
+token_exprs = [
     (r'[ \n\t]+', None),
     (r'#[^\n]*', None),
     (r'\:=', RESERVED),
@@ -35,4 +35,4 @@ tokens_list = [
 ]
 
 def token_lex(characters):
-    return lexer.lex(characters, tokens_list)
+    return lexer.lex(characters, token_exprs)
