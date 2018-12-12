@@ -1,6 +1,7 @@
-n := 5;
-p := 1;
-while n > 0 do
-  p := p * n;
-  n := n - 1
+n = 5;
+p = 1;
+x = 0;
+
+if n == 5 then
+  p = 2
 end
