@@ -2,6 +2,13 @@ n = 5;
 p = 1;
 x = 0;
 
-if n == 5 then
-  p = 2
+while x != 2 do
+  p = p + 2;
+  x = x + 1
+end;
+
+if x == 1 then
+  n = 4
+else
+  n = 6
 end
