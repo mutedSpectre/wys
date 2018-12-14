@@ -21,6 +21,21 @@ class AssignStatement(Statement):
         value = self.aexp.eval(env)
         env[self.name] = value
 
+class PrintStatement(Statement):
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return 'PrintAexp(%s)' % self.name
+
+    def eval(self, prnt, env):
+        if self.name in env:
+            prnt[self.name] = env[self.name]
+            return prnt[self.name]
+        else:
+            return 0
+
+
 class CompoundStatement(Statement):
     def __init__(self, first, second):
         self.first = first
@@ -86,6 +101,19 @@ class VarAexp(Aexp):
             return env[self.name]
         else:
             return 0
+
+#class PrintAexp(Aexp):
+    #def __init__(self, name):
+        #self.name = name
+
+    #def __repr__(self):
+        #return 'PrintAexp(%s)' % self.name
+
+    #def eval(self, prnt):
+        #if self.name in prnt:
+            #return prnt[self.name]
+        #else:
+            #return 0
 
 class BinopAexp(Aexp):
     def __init__(self, op, left, right):
