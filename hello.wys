@@ -11,4 +11,6 @@ if x == 1 then
   n = 4
 else
   n = 6
-end
+end;
+
+print n;
