@@ -28,8 +28,9 @@ if __name__ == '__main__':
 
     ast = parse_result.value
     env = {}
+    prnt = {}
     ast.eval(env)
 
     sys.stdout.write('Final variable values:\n')
-    for name in env:
-        sys.stdout.write('%s: %s\n' % (name, env[name]))
+    for name in prnt:
+        sys.stdout.write('%s: %s\n' % (name, prnt[name]))
