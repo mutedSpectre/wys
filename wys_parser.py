@@ -32,7 +32,8 @@ def stmt_list():
 def stmt():
     return assign_stmt() | \
            if_stmt() | \
-           while_stmt()
+           while_stmt() | \
+           print_stmt()
 
 
 def assign_stmt():
@@ -44,9 +45,10 @@ def assign_stmt():
 
 def print_stmt():
     def process(parsed):
-        (_, ((_, name), _)) = parsed
-        return
-    return keyword('print') + keyword('(') + aexp() + keyword(')') ^ process
+        (_, name) = parsed
+        return PrintStatement(name)
+
+    return keyword('print') + id ^ process
 
 
 def if_stmt():
@@ -153,6 +155,9 @@ def process_logic(op):
 def process_group(parsed):
     ((_, p), _) = parsed
     return p
+
+def process_print(parsed):
+    return PrintStatement(name)
 
 
 def any_operator_in_list(ops):
