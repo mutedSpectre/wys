@@ -5,3 +5,15 @@
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/wys.iml
+.idea/inspectionProfiles/Project_Default.xml
+__pycache__/combinators.cpython-37.pyc
+__pycache__/equality.cpython-37.pyc
+__pycache__/lex_tokens.cpython-37.pyc
+__pycache__/lexer.cpython-37.pyc
+__pycache__/wys_ast.cpython-37.pyc
+__pycache__/lexer.cpython-37.pyc
+__pycache__/wys_parser.cpython-37.pyc
+__pycache__/lexer.cpython-37.pyc
+__pycache__/lexer.cpython-37.pyc
+__pycache__/lexer.cpython-37.pyc
+__pycache__/lexer.cpython-37.pyc
