@@ -43,12 +43,15 @@ def assign_stmt():
 
     return id + keyword('=') + aexp() ^ process
 
-def print_stmt():
-    def process(parsed):
-        (_, name) = parsed
-        return PrintStatement(name)
+#def print_stmt():
+#   def process(parsed):
+#       (_, name) = parsed
+#       return PrintStatement(name)
+#
+#   return keyword('print') + id ^ process
 
-    return keyword('print') + id ^ process
+def print_stmt():
+    return keyword('print') + id ^ (lambda parsed: PrintStatement(parsed[1]))
 
 
 def if_stmt():
