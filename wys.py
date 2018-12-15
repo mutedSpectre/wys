@@ -29,7 +29,10 @@ if __name__ == '__main__':
     ast = parse_result.value
     env = {}
     prnt = {}
-    ast.eval(env)
+    if ast != 'print':
+        ast.eval(env)
+    else:
+        ast.prnt(env, prnt)
 
     sys.stdout.write('Final variable values:\n')
     for name in prnt:
