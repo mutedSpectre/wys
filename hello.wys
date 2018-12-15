@@ -13,4 +13,4 @@ else
   n = 6
 end;
 
-print n;
+print n
