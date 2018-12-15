@@ -26,12 +26,15 @@ class PrintStatement(Statement):
         self.name = name
 
     def __repr__(self):
-        return 'PrintAexp(%s)' % self.name
+        return 'PrintStatement(%s)' % self.name
 
-    def eval(self, prnt, env):
+    def eval(self, env):
+        return 0
+
+    def prnt(self, env, prnt):
         if self.name in env:
-            prnt[self.name] = env[self.name]
-            return prnt[self.name]
+            value = env[self.name]
+            prnt[self.name] = value
         else:
             return 0
 
