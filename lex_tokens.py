@@ -32,6 +32,7 @@ token_exprs = [
     (r'do',                    RESERVED),
     (r'end',                   RESERVED),
     (r'print',                 RESERVED),
+    (r'input',                 RESERVED),
     (r'[0-9]+',                INT),
     (r'[A-Za-z][A-Za-z0-9_]*', ID),
 ]
