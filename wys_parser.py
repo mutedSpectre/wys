@@ -33,7 +33,8 @@ def stmt():
     return assign_stmt() | \
            if_stmt() | \
            while_stmt() | \
-           print_stmt()
+           print_stmt() | \
+           input_stmt()
 
 
 def assign_stmt():
@@ -46,6 +47,9 @@ def assign_stmt():
 
 def print_stmt():
     return keyword('print') + id ^ (lambda parsed: PrintStatement(parsed[1]))
+
+def input_stmt():
+    return keyword('input') + id ^ (lambda parsed: InputStatement(parsed[1]))
 
 
 def if_stmt():
