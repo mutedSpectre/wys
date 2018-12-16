@@ -32,6 +32,17 @@ class PrintStatement(Statement):
         value = env[self.name]
         print(value)
 
+class InputStatement(Statement):
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return 'InputStatement(%s)' % self.name
+
+    def eval(self, env):
+        value = input()
+        env[self.name] = value
+
 
 
 class CompoundStatement(Statement):
