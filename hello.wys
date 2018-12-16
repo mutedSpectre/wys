@@ -13,5 +13,5 @@ else
   n = 6
 end;
 
-input x;
-print x
+input (x);
+print (x)
