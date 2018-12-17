@@ -82,7 +82,7 @@ def for_stmt():
         return ForStatement(condition_first, condition_second, body)
 
     return keyword('for') + aexp_value() + \
-           keyword('to') + + aexp_value() + \
+           keyword('to') + aexp_value() + \
            keyword('{') + Lazy(stmt_list) + \
            keyword('}') ^ process
 
