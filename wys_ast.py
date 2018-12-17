@@ -88,6 +88,23 @@ class WhileStatement(Statement):
             self.body.eval(env)
             condition_value = self.condition.eval(env)
 
+class ForStatement(Statement):
+    def __init__(self, condition_first, condition_second, body):
+        self.condition_first = condition_first
+        self.condition_second = condition_second
+        self.body = body
+
+    def __repr__(self):
+        return 'ForStatement(%s, %s, %s)' % (self.condition_first, self.condition_second, self.body)
+
+    def eval(self, env):
+        condition_value_first = self.condition_first.eval(env)
+        condition_value_second = self.condition_second.eval(env)
+        for condition_value_first in condition_value_second:
+            self.body.eval(env)
+            condition_value_first = self.condition_first.eval(env)
+            condition_value_second = self.condition_second.eval(env)
+
 class IntAexp(Aexp):
     def __init__(self, i):
         self.i = i
