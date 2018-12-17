@@ -76,6 +76,15 @@ def while_stmt():
            keyword('do') + Lazy(stmt_list) + \
            keyword('end') ^ process
 
+def for_stmt():
+    def process(parsed):
+        ((((((_, condition_first), _), condition_second), _), body), _) = parsed
+        return ForStatement(condition_first, condition_second, body)
+
+    return keyword('for') + aexp_value() + \
+           keyword('to') + + aexp_value() + \
+           keyword('{') + Lazy(stmt_list) + \
+           keyword('}') ^ process
 
 # Boolean expressions
 def bexp():
