@@ -79,8 +79,8 @@ def while_stmt():
 
 def for_stmt():
     def process(parsed):
-        ((((((_, condition_first), _), condition_second), _), body), _) = parsed
-        return ForStatement(condition_first, condition_second, body)
+        ((((((_, first_condition), _), second_condition), _), body), _) = parsed
+        return ForStatement(first_condition, second_condition, body)
 
     return keyword('for') + aexp() + \
            keyword('to') + aexp() + \
