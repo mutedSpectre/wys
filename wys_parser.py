@@ -167,9 +167,6 @@ def process_group(parsed):
     ((_, p), _) = parsed
     return p
 
-def process_print(parsed):
-    return PrintStatement(name)
-
 
 def any_operator_in_list(ops):
     op_parsers = [keyword(op) for op in ops]
