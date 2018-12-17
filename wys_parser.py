@@ -33,6 +33,7 @@ def stmt():
     return assign_stmt() | \
            if_stmt() | \
            while_stmt() | \
+           for_stmt() | \
            print_stmt() | \
            input_stmt()
 
@@ -73,16 +74,16 @@ def while_stmt():
         return WhileStatement(condition, body)
 
     return keyword('while') + bexp() + \
-           keyword('do') + Lazy(stmt_list) + \
-           keyword('end') ^ process
+           keyword('{') + Lazy(stmt_list) + \
+           keyword('}') ^ process
 
 def for_stmt():
     def process(parsed):
         ((((((_, condition_first), _), condition_second), _), body), _) = parsed
         return ForStatement(condition_first, condition_second, body)
 
-    return keyword('for') + aexp_value() + \
-           keyword('to') + aexp_value() + \
+    return keyword('for') + aexp() + \
+           keyword('to') + aexp() + \
            keyword('{') + Lazy(stmt_list) + \
            keyword('}') ^ process
 
