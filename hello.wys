@@ -2,10 +2,11 @@ n = 5;
 p = 1;
 x = 0;
 
-while x != 2 do
+while x != 2
+{
   p = p + 2;
   x = x + 1
-end;
+};
 
 if x == 1 then
   n = 4
@@ -17,8 +18,9 @@ n = 0;
 i = 0;
 input x;
 
-for n to x {
+for 4 to 6
+{
   i = i + 1
-};
+}
 
 print x
