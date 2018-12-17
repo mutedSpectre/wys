@@ -10,6 +10,8 @@ token_exprs = [
     (r':=',                    RESERVED),
     (r'\(',                    RESERVED),
     (r'\)',                    RESERVED),
+    (r'\{',                    RESERVED),
+    (r'\}',                    RESERVED),
     (r';',                     RESERVED),
     (r'\+',                    RESERVED),
     (r'-',                     RESERVED),
