@@ -49,7 +49,7 @@ def print_stmt():
     return keyword('print') + id ^ (lambda parsed: PrintStatement(parsed[1]))
 
 def input_stmt():
-    return keyword('input') + keyword('(') + id + keyword(')') ^ (lambda parsed: InputStatement(parsed[1]))
+    return keyword('input') + id ^ (lambda parsed: InputStatement(parsed[1]))
 
 
 def if_stmt():
