@@ -49,6 +49,7 @@ def assign_stmt():
 def print_stmt():
     return keyword('print') + id ^ (lambda parsed: PrintStatement(parsed[1]))
 
+
 def input_stmt():
     return keyword('input') + id ^ (lambda parsed: InputStatement(parsed[1]))
 
@@ -77,7 +78,8 @@ def while_stmt():
            keyword('{') + Lazy(stmt_list) + \
            keyword('}') ^ process
 
-def for_stmt():
+
+def for_stmt():  # Work in progress
     def process(parsed):
         ((((((_, first_condition), _), second_condition), _), body), _) = parsed
         return ForStatement(first_condition, second_condition, body)
@@ -86,6 +88,7 @@ def for_stmt():
            keyword('to') + id + \
            keyword('{') + Lazy(stmt_list) + \
            keyword('}') ^ process
+
 
 # Boolean expressions
 def bexp():
