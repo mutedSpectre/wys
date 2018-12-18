@@ -98,7 +98,10 @@ class ForStatement(Statement):
         return 'ForStatement(%s, %s, %s)' % (self.first_condition, self.second_condition, self.body)
 
     def eval(self, env):
-        for self.first_condition in self.second_condition:
+        first_value = self.first_condition
+        second_value = self.second_condition
+
+        for i in range(first_value, second_value):
             self.body.eval(env)
 
 class IntAexp(Aexp):
