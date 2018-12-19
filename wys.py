@@ -5,15 +5,17 @@ import os
 from wys_parser import *
 from lex_tokens import *
 
+
 def usage():
     sys.stderr.write('Usage: wys filename\n')
     sys.exit(1)
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         usage()
 
-    filename, file_extension = os.path.splitext(sys.argv[1])   #Extension check
+    filename, file_extension = os.path.splitext(sys.argv[1])  # Extension check
     if file_extension != '.wys':
         usage()
 
