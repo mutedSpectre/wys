@@ -1,13 +1,17 @@
 from equality import *
 
+
 class Statement(Equality):
     pass
+
 
 class Aexp(Equality):
     pass
 
+
 class Bexp(Equality):
     pass
+
 
 class AssignStatement(Statement):
     def __init__(self, name, aexp):
@@ -21,6 +25,7 @@ class AssignStatement(Statement):
         value = self.aexp.eval(env)
         env[self.name] = value
 
+
 class PrintStatement(Statement):
     def __init__(self, name):
         self.name = name
@@ -31,6 +36,7 @@ class PrintStatement(Statement):
     def eval(self, env):
         value = env[self.name]
         print(value)
+
 
 class InputStatement(Statement):
     def __init__(self, name):
@@ -44,7 +50,6 @@ class InputStatement(Statement):
         env[self.name] = value
 
 
-
 class CompoundStatement(Statement):
     def __init__(self, first, second):
         self.first = first
@@ -56,6 +61,7 @@ class CompoundStatement(Statement):
     def eval(self, env):
         self.first.eval(env)
         self.second.eval(env)
+
 
 class IfStatement(Statement):
     def __init__(self, condition, true_stmt, false_stmt):
@@ -74,6 +80,7 @@ class IfStatement(Statement):
             if self.false_stmt:
                 self.false_stmt.eval(env)
 
+
 class WhileStatement(Statement):
     def __init__(self, condition, body):
         self.condition = condition
@@ -88,10 +95,11 @@ class WhileStatement(Statement):
             self.body.eval(env)
             condition_value = self.condition.eval(env)
 
+
 class ForStatement(Statement):
-    def __init__(self, first_condition, second_condtition, body):
+    def __init__(self, first_condition, second_condition, body):
         self.first_condition = first_condition
-        self.second_condition = second_condtition
+        self.second_condition = second_condition
         self.body = body
 
     def __repr__(self):
@@ -104,6 +112,7 @@ class ForStatement(Statement):
         for i in range(first_value, second_value):
             self.body.eval(env)
 
+
 class IntAexp(Aexp):
     def __init__(self, i):
         self.i = i
@@ -113,6 +122,7 @@ class IntAexp(Aexp):
 
     def eval(self, env):
         return self.i
+
 
 class VarAexp(Aexp):
     def __init__(self, name):
@@ -126,6 +136,7 @@ class VarAexp(Aexp):
             return env[self.name]
         else:
             return 0
+
 
 class BinopAexp(Aexp):
     def __init__(self, op, left, right):
@@ -150,6 +161,7 @@ class BinopAexp(Aexp):
         else:
             raise RuntimeError('unknown operator: ' + self.op)
         return value
+
 
 class RelopBexp(Bexp):
     def __init__(self, op, left, right):
@@ -179,6 +191,7 @@ class RelopBexp(Bexp):
             raise RuntimeError('unknown operator: ' + self.op)
         return value
 
+
 class AndBexp(Bexp):
     def __init__(self, left, right):
         self.left = left
@@ -192,6 +205,7 @@ class AndBexp(Bexp):
         right_value = self.right.eval(env)
         return left_value and right_value
 
+
 class OrBexp(Bexp):
     def __init__(self, left, right):
         self.left = left
@@ -204,6 +218,7 @@ class OrBexp(Bexp):
         left_value = self.left.eval(env)
         right_value = self.right.eval(env)
         return left_value or right_value
+
 
 class NotBexp(Bexp):
     def __init__(self, exp):
