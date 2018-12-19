@@ -40,5 +40,6 @@ token_exprs = [
     (r'[A-Za-z][A-Za-z0-9_]*', ID),
 ]
 
+
 def token_lex(characters):
     return lexer.lex(characters, token_exprs)
