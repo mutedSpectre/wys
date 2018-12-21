@@ -84,8 +84,8 @@ def for_stmt():  # Work in progress
         ((((((_, first_condition), _), second_condition), _), body), _) = parsed
         return ForStatement(first_condition, second_condition, body)
 
-    return keyword('for') + id + \
-           keyword('to') + id + \
+    return keyword('for') + aexp_value() + \
+           keyword('to') + aexp_value() + \
            keyword('{') + Lazy(stmt_list) + \
            keyword('}') ^ process
 
