@@ -26,3 +26,9 @@ class ParserStatementTests(unittest.TestCase):
                                        wys_ast.AssignStatement('x', wys_ast.IntAexp(3)),
                                        wys_ast.AssignStatement('x', wys_ast.IntAexp(4)))
         self.parser_test(code, wys_parser.stmt_list(), expected)
+
+    def test_while_stmt(self):
+        code = 'while l < 2 { x = 3 }'
+        expected = wys_ast.WhileStatement(wys_ast.RelopBexp('<', wys_ast.IntAexp(1), wys_ast.IntAexp(2)),
+                                          wys_ast.AssignStatement('x', wys_ast.IntAexp(3)))
+        self.parser_test(code, wys_parser.stmt_list(), expected)
