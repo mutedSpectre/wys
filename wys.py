@@ -25,7 +25,7 @@ if __name__ == '__main__':
     parse_result = wys_parse(tokens)
 
     if not parse_result:
-        sys.stderr.write('Parse error!\n')
+        sys.stderr.write('Code compilation error: Parse error.\n')
         sys.exit(1)
 
     ast = parse_result.value
