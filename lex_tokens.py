@@ -34,6 +34,8 @@ token_exprs = [
     (r'while', RESERVED),
     (r'do', RESERVED),
     (r'end', RESERVED),
+    (r'for', RESERVED),
+    (r'to', RESERVED),
     (r'print', RESERVED),
     (r'input', RESERVED),
     (r'[0-9]+', INT),
