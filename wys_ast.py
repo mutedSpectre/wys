@@ -106,9 +106,8 @@ class ForStatement(Statement):
         return 'ForStatement(%s, %s, %s)' % (self.first_condition, self.second_condition, self.body)
 
     def eval(self, env):
-        first_value = self.first_condition
-        second_value = self.second_condition
-
+        first_value = self.first_condition.eval(env)
+        second_value = self.second_condition.eval(env)
         for i in range(first_value, second_value):
             self.body.eval(env)
 
