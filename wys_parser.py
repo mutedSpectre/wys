@@ -79,9 +79,9 @@ def while_stmt():
            keyword('}') ^ process
 
 
-def for_stmt():  # Work in progress
+def for_stmt():
     def process(parsed):
-        (((((_, first_condition), (_, second_condition)), _), body), _) = parsed
+        ((((((_, first_condition), _), second_condition), _), body), _) = parsed
         return ForStatement(first_condition, second_condition, body)
 
     return keyword('for') + aexp() + \
