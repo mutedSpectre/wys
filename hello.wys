@@ -15,12 +15,12 @@ else
 end;
 
 n = 0;
-i = 0;
+i = 2;
 input x;
 
-for 4 to 6
+for n to i
 {
-  i = i + 1
-}
+  x = 2
+};
 
 print x
